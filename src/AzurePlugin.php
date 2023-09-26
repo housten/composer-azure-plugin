@@ -119,7 +119,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
     }
 
     protected function parseRequiredPackages(Composer $composer): array
-    {   $versionEspecifica = '2.0.1';
+    {    
         $azureRepositories = [];
         $extra = $composer->getPackage()->getExtra();
         $requires = $composer->getPackage()->getRequires();
@@ -128,12 +128,12 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             return [];
         }
 
-        foreach ($extra['azure-repositories'] as ['organization' => $organization, 'project' => $project, 'feed' => $feed, 'symlink' => $symlink, 'packages' => $packages]) {
-            $azureRepository = new AzureRepository($organization, $project, $feed, $symlink);
+        foreach ($extra['azure-repositories'] as ['organization' => $organization, 'project' => $project, 'feed' => $feed, 'symlink' => $symlink,"version"=>$version, 'packages' => $packages]) {
+            $azureRepository = new AzureRepository($organization, $project, $feed, $symlink, $version);
 
             foreach ($packages as $packageName) {
                 if (array_key_exists($packageName, $requires)) {
-                    $azureRepository->addArtifact($packageName, $versionEspecifica);
+                    $azureRepository->addArtifact($packageName);
                 }
             }
 
@@ -218,7 +218,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             $command .= ' --scope ' . $azureRepository->getScope();
             $command .= ' --feed ' . $azureRepository->getFeed();
             $command .= ' --name ' . str_replace('/', '.', $artifact->getName());
-            $command .= ' --version \'' . $artifact->getVersion()->getVersion() . '\'';
+            $command .= ' --version \'' . $azureRepository->getVersion() . '\'';
             $command .= ' --path ' . $artifactPath;
 
             $result = $this->commandExecutor->executeShellCmd($command);
