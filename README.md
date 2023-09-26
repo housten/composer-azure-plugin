@@ -1,4 +1,4 @@
-![Build status](https://github.com/luis2307/composer-azure-plugin/workflows/CI/badge.svg)
+![Build status](https://github.com/luis2307/composer-azure-plugin-demo/workflows/CI/badge.svg)
  
 # Composer Azure Plugin
 
@@ -9,7 +9,7 @@ Composer Azure plugin is an attempt to use Composer with Azure DevOps artifacts,
 Composer Azure Plugin requires [Composer 2](https://getcomposer.org/) and PHP8.1 or newer. It should be installed globally.
 
 ```
-$ composer global require luis2307/composer-azure-plugin
+$ composer global require luis2307/composer-azure-plugin-demo
 ```
 
 You have to be logged in via

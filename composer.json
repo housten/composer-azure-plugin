@@ -1,5 +1,5 @@
 {
-    "name": "luis2307/composer-azure-plugin",
+    "name": "luis2307/composer-azure-plugin-demo",
     "description": "Azure Composer plugin",
     "version": "2.0.2",
     "type": "composer-plugin",
