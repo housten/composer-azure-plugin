@@ -1,7 +1,7 @@
 {
     "name": "luis2307/composer-azure-plugin-demo",
     "description": "Azure Composer plugin",
-    "version": "2.0.2",
+    "version": "2.0.4",
     "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
