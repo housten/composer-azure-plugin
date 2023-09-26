@@ -52,9 +52,9 @@ class AzureRepository
         return $this->version;
     }
 
-    public function addArtifact(string $name): void
+    public function addArtifact(string $name, string $version): void
     {
-        $this->artifacts[] = new Artifact($name);
+        $this->artifacts[] = new Artifact($name, new Version($version));
     }
 
     public function updateArtifactVersion(int $index, string $version): void

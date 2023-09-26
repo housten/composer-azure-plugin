@@ -133,7 +133,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
 
             foreach ($packages as $packageName) {
                 if (array_key_exists($packageName, $requires)) {
-                    $azureRepository->addArtifact($packageName);
+                    $azureRepository->addArtifact($packageName,$version); 
                 }
             }
 
