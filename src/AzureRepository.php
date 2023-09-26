@@ -9,16 +9,14 @@ class AzureRepository
     protected string $scope;
     protected string $feed;
     protected bool $symlink;
-    protected string $version;
     protected array $artifacts = [];
 
-    public function __construct(string $organization, string $project, string $feed, bool $symlink, string $version)
+    public function __construct(string $organization, string $project, string $feed, bool $symlink)
     {
         $this->organization = $organization;
         $this->project = $project;
         $this->feed = $feed;
         $this->symlink = $symlink;
-        $this->version = $version;
         $this->scope = "project";
     }
 
@@ -45,11 +43,6 @@ class AzureRepository
     public function getSymlink(): bool
     {
         return $this->symlink;
-    }
-
-    public function getVersion(): bool
-    {
-        return $this->version;
     }
 
     public function addArtifact(string $name, string $version): void

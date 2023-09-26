@@ -60,7 +60,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
     public function getCapabilities(): array
     {
         return [
-            'Composer\Plugin\Capability\CommandProvider' => 'luis2307\Composer\CommandProvider',
+            'Composer\Plugin\Capability\CommandProvider' => 'MarvinCaspar\Composer\CommandProvider',
         ];
     }
 
@@ -119,7 +119,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
     }
 
     protected function parseRequiredPackages(Composer $composer): array
-    {    
+    {
         $azureRepositories = [];
         $extra = $composer->getPackage()->getExtra();
         $requires = $composer->getPackage()->getRequires();
@@ -128,12 +128,12 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             return [];
         }
 
-        foreach ($extra['azure-repositories'] as ['organization' => $organization, 'project' => $project, 'feed' => $feed, 'symlink' => $symlink,"version"=>$version, 'packages' => $packages]) {
-            $azureRepository = new AzureRepository($organization, $project, $feed, $symlink, $version);
+        foreach ($extra['azure-repositories'] as ['organization' => $organization, 'project' => $project, 'feed' => $feed, 'symlink' => $symlink, 'packages' => $packages]) {
+            $azureRepository = new AzureRepository($organization, $project, $feed, $symlink);
 
             foreach ($packages as $packageName) {
                 if (array_key_exists($packageName, $requires)) {
-                    $azureRepository->addArtifact($packageName,$version); 
+                    $azureRepository->addArtifact($packageName, $requires[$packageName]->getPrettyConstraint());
                 }
             }
 
@@ -218,7 +218,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             $command .= ' --scope ' . $azureRepository->getScope();
             $command .= ' --feed ' . $azureRepository->getFeed();
             $command .= ' --name ' . str_replace('/', '.', $artifact->getName());
-            $command .= ' --version \'' . $azureRepository->getVersion() . '\'';
+            $command .= ' --version \'' . $artifact->getVersion()->getVersion() . '\'';
             $command .= ' --path ' . $artifactPath;
 
             $result = $this->commandExecutor->executeShellCmd($command);
