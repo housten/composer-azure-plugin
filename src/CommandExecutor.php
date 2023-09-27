@@ -8,9 +8,13 @@ class CommandExecutor
 {
     public function executeShellCmd(string $cmd): mixed
     {
+        printf(" executeShellCmd:  ");             
+        var_dump($cmd);
         $output = [];
         $return_var = -1;
         $result = exec($cmd, $output, $return_var);
+        printf(" result:  ");   
+        var_dump($result);
 
         if ($return_var !== 0) {
             printf(" CommandExecutor error:  ");             
