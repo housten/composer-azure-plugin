@@ -13,7 +13,7 @@ class FileHelper
 
         while (false !== ($file = readdir($dir))) {
             if (($file != '.') && ($file != '..')) {
-                $full = $rootPath . DIRECTORY_SEPARATOR . $file;
+                $full = $rootPath . "/" . $file;
 
                 if (is_dir($full)) {
                     self::removeDirectory($full);
@@ -42,10 +42,10 @@ class FileHelper
 
         while (false !== ($file = readdir($dir))) {
             if (($file != '.') && ($file != '..')) {
-                if (is_dir($src . DIRECTORY_SEPARATOR . $file)) {
-                    self::copyDirectory($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
+                if (is_dir($src . "/" . $file)) {
+                    self::copyDirectory($src . "/" . $file, $dst . "/" . $file);
                 } else {
-                    copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
+                    copy($src . "/" . $file, $dst . "/" . $file);
                 }
             }
         }

@@ -21,8 +21,8 @@ class PublishCommandTest extends TestCase
     {
         $ioMock = $this->getMockBuilder(IOInterface::class)->getMock();
         $factory = new Factory();
-        $this->composerWithAzureRepos = $factory->createComposer($ioMock, implode(DIRECTORY_SEPARATOR, ['./tests', 'composer-with-azure-repo.json']));
-        $this->composerWithoutAzureRepos = $factory->createComposer($ioMock, implode(DIRECTORY_SEPARATOR, ['./tests', 'composer-without-azure-repo.json']));
+        $this->composerWithAzureRepos = $factory->createComposer($ioMock, implode("/", ['./tests', 'composer-with-azure-repo.json']));
+        $this->composerWithoutAzureRepos = $factory->createComposer($ioMock, implode("/", ['./tests', 'composer-without-azure-repo.json']));
 
         $this->inputMock = $this->getMockBuilder(InputInterface::class)
             ->getMockForAbstractClass();

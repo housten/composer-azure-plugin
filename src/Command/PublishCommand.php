@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PublishCommand extends BaseCommand
 {
-    protected $tempDir = '..' . DIRECTORY_SEPARATOR . '.temp';
+    protected $tempDir = '..' . "/" . '.temp';
     protected FileHelper $fileHelper;
 
     protected function configure()
@@ -48,11 +48,11 @@ class PublishCommand extends BaseCommand
 
     protected function cleanIgnoredFiles()
     {
-        if (!file_exists($this->tempDir . DIRECTORY_SEPARATOR . '.gitignore')) {
+        if (!file_exists($this->tempDir . "/" . '.gitignore')) {
             return;
         }
 
-        $ignoredFiles = file($this->tempDir . DIRECTORY_SEPARATOR . '.gitignore');
+        $ignoredFiles = file($this->tempDir . "/" . '.gitignore');
 
         if ($ignoredFiles === false) {
             return;
@@ -66,7 +66,7 @@ class PublishCommand extends BaseCommand
             $ignoredFile = trim($ignoredFile);
             // add / if entry don't start with a /
             if (substr($ignoredFile, 0, 1) !== "/") {
-                $ignoredFile = DIRECTORY_SEPARATOR . $ignoredFile;
+                $ignoredFile = "/" . $ignoredFile;
             }
 
             $ignoredFileOrDir = $this->tempDir . $ignoredFile;

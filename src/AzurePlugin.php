@@ -38,7 +38,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
     {
         $this->composer = $composer;
         $this->io = $io;
-        $this->composerCacheDir = (string)$this->composer->getConfig()->get('cache-dir') . DIRECTORY_SEPARATOR . 'azure';
+        $this->composerCacheDir = (string)$this->composer->getConfig()->get('cache-dir') . "/" . 'azure';
         $this->fileHelper = new FileHelper();
 
         $extra = $composer->getPackage()->getExtra();
@@ -263,7 +263,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
     protected function getArtifactPath(string $organization, string $feed, Artifact $artifact): string
     {
         return implode(
-            DIRECTORY_SEPARATOR,
+            "/",
             [
                 $this->composerCacheDir,
                 $organization,
@@ -285,7 +285,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
     protected function getComposerForPackage(string $path): Composer
     {
         $factory = new Factory();
-        return $factory->createComposer($this->io, implode(DIRECTORY_SEPARATOR, [$path, Factory::getComposerFile()]));
+        return $factory->createComposer($this->io, implode("/", [$path, Factory::getComposerFile()]));
     }
 
     protected function addAzurePackagesAsLocalRepositories(array $azureRepositories)

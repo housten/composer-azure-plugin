@@ -29,10 +29,10 @@ final class AzurePluginTest extends TestCase
 
         $this->ioMock = $this->getMockBuilder(IOInterface::class)->getMock();
         $factory = new Factory();
-        $this->composerWithAzureRepos = $factory->createComposer($this->ioMock, implode(DIRECTORY_SEPARATOR, ['./tests', 'composer-with-azure-repo.json']));
-        $this->composerWithoutAzureRepos = $factory->createComposer($this->ioMock, implode(DIRECTORY_SEPARATOR, ['./tests', 'composer-without-azure-repo.json']));
+        $this->composerWithAzureRepos = $factory->createComposer($this->ioMock, implode("/", ['./tests', 'composer-with-azure-repo.json']));
+        $this->composerWithoutAzureRepos = $factory->createComposer($this->ioMock, implode("/", ['./tests', 'composer-without-azure-repo.json']));
 
-        $this->cacheDir = (string)$this->composerWithAzureRepos->getConfig()->get('cache-dir') . DIRECTORY_SEPARATOR . 'azure';
+        $this->cacheDir = (string)$this->composerWithAzureRepos->getConfig()->get('cache-dir') . "/" . 'azure';
     }
 
     public function testGetCapabilities(): void
