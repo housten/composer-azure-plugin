@@ -103,9 +103,9 @@ class PublishCommand extends BaseCommand
         $return_var = -1;
         exec($cmd, $output, $return_var);
         printf(" executeShellCmd  :  ");
-        printf( $output); 
-        printf( $cmd); 
-        printf( $return_var); 
+        var_dump( $output); 
+        var_dump( $cmd); 
+        var_dump( $return_var); 
         if ($return_var !== 0) {
             throw new \Exception(implode("\n", $output));
         }
