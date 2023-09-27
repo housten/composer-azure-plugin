@@ -220,7 +220,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             $command .= ' --feed ' . $azureRepository->getFeed();
             $command .= ' --name ' . str_replace('/', '.', $artifact->getName());
             $command .= ' --version \'' . $artifact->getVersion()->getVersion() . '\'';
-            $command .= ' --path ' . $artifactPath;
+            $command .= ' --path \'' . $artifactPath. '\'';
 
             printf(" downloadAzureArtifact comand show  :  ");
             printf( $command); 
