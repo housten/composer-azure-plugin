@@ -92,7 +92,8 @@ class PublishCommand extends BaseCommand
         $command .= ' --version ' . $this->getComposer()->getPackage()->getPrettyVersion();
         $command .= ' --description "' . $this->getComposer()->getPackage()->getDescription() . '"';
         $command .= ' --path ' . $this->tempDir;
-
+        printf(" sendPackage  :  ");
+        printf($command); 
         $this->executeShellCmd($command);
     }
 
@@ -101,7 +102,10 @@ class PublishCommand extends BaseCommand
         $output = array();
         $return_var = -1;
         exec($cmd, $output, $return_var);
-
+        printf(" executeShellCmd  :  ");
+        printf( $output); 
+        printf( $cmd); 
+        printf( $return_var); 
         if ($return_var !== 0) {
             throw new \Exception(implode("\n", $output));
         }

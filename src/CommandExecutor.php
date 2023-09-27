@@ -13,6 +13,8 @@ class CommandExecutor
         $result = exec($cmd, $output, $return_var);
 
         if ($return_var !== 0) {
+            printf(" CommandExecutor error:  ");
+            printf($output); 
             throw new Exception(implode("\n", $output));
         }
 

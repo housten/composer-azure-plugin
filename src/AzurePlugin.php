@@ -206,7 +206,8 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
         }
 
         $artifactPath = $this->getArtifactPath($azureRepository->getOrganization(), $azureRepository->getFeed(), $artifact);
-
+        printf(" downloadAzureArtifact artifactPath :  ");
+        printf( $artifactPath); 
         // scandir > 2 because of . and .. entries
         if (is_dir($artifactPath) && count(scandir($artifactPath)) > 2) {
             $this->io->write('<info>Package ' . $artifact->getName() . ' already downloaded - ' . $artifactPath . '</info>');
@@ -220,6 +221,10 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             $command .= ' --name ' . str_replace('/', '.', $artifact->getName());
             $command .= ' --version \'' . $artifact->getVersion()->getVersion() . '\'';
             $command .= ' --path ' . $artifactPath;
+
+            printf(" downloadAzureArtifact comand show  :  ");
+            printf( $command); 
+            
 
             $result = $this->commandExecutor->executeShellCmd($command);
             $downloadedArtifact = new Artifact($artifact->getName(), new Version($result->Version));
