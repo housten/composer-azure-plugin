@@ -18,7 +18,7 @@ class CommandExecutor
 
         if ($return_var !== 0) {
             printf(" CommandExecutor error:  ");             
-            var_dump($array);
+            var_dump($output);
             throw new Exception(implode("\n", $output));
         }
 
