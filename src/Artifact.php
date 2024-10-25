@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace luis2307\Composer;
+namespace housten\Composer;
 
 
 class Artifact
