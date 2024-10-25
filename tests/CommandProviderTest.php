@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use luis2307\Composer\Command\PublishCommand;
-use luis2307\Composer\CommandProvider;
+use housten\Composer\Command\PublishCommand;
+use housten\Composer\CommandProvider;
 use PHPUnit\Framework\TestCase;
 
 final class CommandProviderTest extends TestCase
