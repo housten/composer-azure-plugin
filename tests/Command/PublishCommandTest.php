@@ -60,19 +60,23 @@ class PublishCommandTest extends TestCase
         $this->assertSame(0, $status);
     }
 
+
     public function testExecutionWithAzureRepos()
     {
         $publishCommand = $this->getMockBuilder(PublishCommand::class)
             ->onlyMethods(['executeShellCmd'])
             ->getMock();
         $publishCommand->setComposer($this->composerWithAzureRepos);
-
+    
+        $expectedCommand = 'az artifacts universal publish --organization https://dev.azure.com/vendor --project "project" --scope project --feed feed --name vendor.package --version 1.0.0 --description "" --path ../.temp';
+    
         $publishCommand->expects($this->once())
             ->method('executeShellCmd')
-            ->with('az artifacts universal publish --organization https://dev.azure.com/vendor --project "project" --scope project --feed feed --name vendor.package --version 1.0.0 --description "" --path ../.temp');
-
+            ->with($expectedCommand);
+    
         $status = $publishCommand->run($this->inputMock, $this->outputMock);
-
+    
         $this->assertSame(0, $status);
+        // Add more assertions to verify state and side effects if necessary
     }
 }

@@ -107,17 +107,25 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             return;
         }
 
-        $sedCommand = 'sed -i -e "s|' . $search . '|' . $replaceWith . '|g" composer.lock';
-        // on macos sed needs an empty string for the i parameter
-        if (strtolower(PHP_OS) === 'darwin') {
-            $sedCommand = 'sed -i "" -e "s|' . $search . '|' . $replaceWith . '|g" composer.lock';
+        // Read the file contents
+        $filePath = 'composer.lock';
+        $fileContents = file_get_contents($filePath);
+        if ($fileContents === false) {
+            throw new Exception("Failed to read the file: $filePath");
         }
 
-        $this->commandExecutor->executeShellCmd($sedCommand);
+        // Perform the string replacement
+        $modifiedContents = str_replace($search, $replaceWith, $fileContents);
 
+        // Write the modified contents back to the file
+        $result = file_put_contents($filePath, $modifiedContents);
+        if ($result === false) {
+            throw new Exception("Failed to write to the file: $filePath");
+        }
+
+        // Output a success message
         $this->io->write('<info>Modified composer.lock path</info>');
     }
-
     protected function parseRequiredPackages(Composer $composer): array
     {
         $azureRepositories = [];
