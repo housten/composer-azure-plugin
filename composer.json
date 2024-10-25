@@ -1,7 +1,7 @@
 {
     "name": "housten/composer-azure-plugin",
     "description": "Azure Composer plugin",
-    "version": "2.1.9",
+    "version": "2.1.10",
     "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
