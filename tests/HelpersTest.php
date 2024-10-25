@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use luis2307\Composer\FileHelper;
+use housten\Composer\FileHelper;
 use PHPUnit\Framework\TestCase;
 
 final class HelpersTest extends TestCase
