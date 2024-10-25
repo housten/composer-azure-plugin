@@ -1,6 +1,6 @@
 <?php
 
-namespace luis2307\Composer;
+namespace housten\Composer;
 
 class FileHelper
 {
