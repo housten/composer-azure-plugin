@@ -1,6 +1,6 @@
 <?php
 
-namespace luis2307\Composer;
+namespace housten\Composer;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
@@ -60,7 +60,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
     public function getCapabilities(): array
     {
         return [
-            'Composer\Plugin\Capability\CommandProvider' => 'luis2307\Composer\CommandProvider',
+            'Composer\Plugin\Capability\CommandProvider' => 'housten\Composer\CommandProvider',
         ];
     }
 
