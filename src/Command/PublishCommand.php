@@ -1,9 +1,9 @@
 <?php
 
-namespace luis2307\Composer\Command;
+namespace housten\Composer\Command;
 
 use Composer\Command\BaseCommand;
-use luis2307\Composer\FileHelper;
+use housten\Composer\FileHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
