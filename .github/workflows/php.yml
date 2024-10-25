@@ -35,7 +35,7 @@ jobs:
       - name: Setup PHP with Xdebug 2.x
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.3'
           tools: composer:v${{ matrix.composer }}
           coverage: xdebug2
 
