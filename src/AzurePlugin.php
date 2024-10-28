@@ -215,7 +215,7 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
 
         $artifactPath = $this->getArtifactPath($azureRepository->getOrganization(), $azureRepository->getFeed(), $artifact);
         printf(" downloadAzureArtifact artifactPath :  ");
-        printf( $artifactPath); 
+        printf("%s\n", $artifactPath); 
         // scandir > 2 because of . and .. entries
         if (is_dir($artifactPath) && count(scandir($artifactPath)) > 2) {
             $this->io->write('<info>Package ' . $artifact->getName() . ' already downloaded - ' . $artifactPath . '</info>');
@@ -231,11 +231,25 @@ class AzurePlugin implements PluginInterface, EventSubscriberInterface, Capable
             $command .= ' --path "' . $artifactPath  . '"';
 
             printf(" downloadAzureArtifact comand show  :  ");
-            printf( $command); 
+            printf("%s\n", $command);
             
 
             $result = $this->commandExecutor->executeShellCmd($command);
             $downloadedArtifact = new Artifact($artifact->getName(), new Version($result->Version));
+
+            // Check if the downloaded artifact is a zip file and unzip it
+        $zipFilePath = $artifactPath . '.zip';
+        if (file_exists($zipFilePath)) {
+            $zip = new ZipArchive();
+            if ($zip->open($zipFilePath) === TRUE) {
+                $zip->extractTo($artifactPath);
+                $zip->close();
+                unlink($zipFilePath); // Remove the zip file after extraction
+                $this->io->write('<info>Package ' . $artifact->getName() . ' unzipped - ' . $artifactPath . '</info>');
+            } else {
+                $this->io->write('<error>Failed to unzip package ' . $artifact->getName() . ' - ' . $zipFilePath . '</error>');
+            }
+        }
 
             // is wildcard version, than rename downloaded folder to downloaded version
             if ($artifact->getVersion()->isWildcardVersion()) {
